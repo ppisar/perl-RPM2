@@ -91,6 +91,7 @@ sub create_transaction
 
   $t = RPM2::_create_transaction($flags);
   $t = RPM2::Transaction->_new_raw($t);
+  $t->set_root;
 
   return $t;	
 }
@@ -472,6 +473,12 @@ sub run {
 	$ignore_probs);
 }
 
+sub set_root {
+	my $self = shift;
+	my $root = shift || '/';
+	return $self->{'c_transaction'}->_set_root($root);
+}
+
 # Preloaded methods go here.
 
 1;
@@ -769,6 +776,11 @@ returns the NEVR's not the package headers.
 
 Run the transaction.  This will automatically check for dependency
 satisfaction, and order the transaction.
+
+=item set_root($root)
+
+Set a root directory for the transaction. Defaults to C</>. Returns 0 on
+failure, 1 on success.
 
 =back
 

@@ -633,4 +633,15 @@ _run(t, ok_probs, prob_filter)
     OUTPUT:
 	RETVAL
 
+int
+_set_root(t, root)
+	rpmts t
+	const char *root
+    PREINIT:
+	int ret;
+    CODE:
+	ret = rpmtsSetRootDir(t, root);
+	RETVAL = (ret == 0) ? 1 : 0;
+    OUTPUT:
+	RETVAL
 
