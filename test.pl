@@ -130,7 +130,7 @@ ok(RPM2->expand_macro("%rpm2_test_macro") eq "testval $$");
 RPM2->delete_macro("rpm2_test_macro");
 ok(RPM2->expand_macro("%rpm2_test_macro") eq "%rpm2_test_macro");
 
-ok(RPM2->rpm_api_version =~ /4.\d+/);
+ok(RPM2->rpm_api_version =~ /^(?:\d+(?:\.\d+)?)$/);
 
 #
 # Clean up before transaction tests (close the database
