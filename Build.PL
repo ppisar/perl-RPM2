@@ -24,6 +24,9 @@ my $build = new Module::Build (
 		'File::Basename' => 0,
 		'File::Spec' => 0,
 	},
+    test_requires => {
+        'File::Temp' => 0.19,
+    },
 	extra_compiler_flags => $api_version.scalar `pkg-config rpm --cflags`,
 	extra_linker_flags => scalar `pkg-config rpm --libs`,
 	build_requires => {

@@ -14,6 +14,7 @@ use strict;
 BEGIN { plan tests => 62 };
 use RPM2;
 use POSIX;
+use File::Temp 0.19;
 ok(1); # If we made it this far, we're ok.
 
 #########################
@@ -116,10 +117,10 @@ ok(($pkg <=> $pkg2) == 0);
 ok(!($pkg < $pkg2));
 ok(!($pkg > $pkg2));
 
-my $other_rpm_dir = getcwd() . '/rpmdb';
+my $other_rpm_dir = File::Temp->newdir();
 # another rpm, handily provided by the rpmdb-redhat package
 # ... is no longer shipped. Create a new one:
-system( "rm -rf rpmdb; mkdir rpmdb; /usr/bin/rpmdb --dbpath $other_rpm_dir --initdb" );
+system( "/usr/bin/rpmdb --dbpath $other_rpm_dir --initdb" );
 my $db2 = RPM2->open_rpm_db(-path => $other_rpm_dir);
 ok(defined $db2);
 $db2 = undef;
