@@ -156,7 +156,7 @@ ok($t->order());
 my @rpms = $t->elements();
 ok($rpms[0] eq  $pkg->as_nvre());
 ok(scalar(@rpms) == 1);
-skip( ( $< == 0 ) ? undef : ': must be root to create RPM transaction.',  ( $< == 0 ) ? $t->run() : undef );
+skip( ( $< == 0 ) ? undef : ': must be root to create RPM transaction.',  ( $< == 0 ) ? $t->run('', 1<<9) : undef );
 $t = undef;
 # See if we can find the rpm in the database now...
 $db = RPM2->open_rpm_db();
